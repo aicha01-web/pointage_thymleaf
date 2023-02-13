@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+<html lang="fr" xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
       layout:decorate="~{index}" xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,10 +26,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="title text-center">Liste professeurs</h2>
+                    <h2 class="title text-center">Liste des professeurs</h2>
                 </div>
                 <div class="card-body">
-                    <table class="table table-responsive table-bordered table-striped">
+                    <a th:href="@{/professeur/add}">Créer <span class="tim-icons icon-simple-add"></span></i></a>
+<!--                    <a th:href="@{/professeur/add}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Créer</a>-->
+                    <table class="table table-bordered" align="center">
                         <tr>
                             <th>Prénom</th>
                             <th>Nom</th>
@@ -42,7 +44,8 @@
                             <td th:text="${p.nom}"></td>
                             <td th:text="${p.email}"></td>
                             <td th:text="${p.etat}"></td>
-                            <td><a th:href="@{/edit/{id}(id=${p.id})}">Modifier</a></td>
+                            <td><a th:href="@{/edit/{id}(id=${p.id})}"><i class="tim-icons icon-pencil"></i></a>
+                            <a th:href="@{/delete/{id}(id=${p.id})}"><i class="tim-icons icon-trash-simple"></i></a></td>
                         </tr>
                     </table>
                 </div>

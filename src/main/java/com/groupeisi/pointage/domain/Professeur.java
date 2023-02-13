@@ -19,7 +19,7 @@ public class Professeur implements Serializable {
 
     private String password;
 
-    private int etat;
+    private boolean etat;
 
     public int getId() {
         return id;
@@ -61,11 +61,11 @@ public class Professeur implements Serializable {
         this.password = password;
     }
 
-    public int getEtat() {
+    public boolean getEtat() {
         return etat;
     }
 
-    public void setEtat(int etat) {
+    public void setEtat(boolean etat) {
         this.etat = etat;
     }
 }

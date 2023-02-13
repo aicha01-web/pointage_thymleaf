@@ -38,6 +38,14 @@ public class ProfesseurController {
         return "professeur/edit";
     }
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id, Model model) {
+        ProfesseurEntity prof = professeurRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Id professeur invalide:" + id));
+        professeurRepository.deleteById(id);
+        return "redirect:/professeur/getAll";
+    }
+
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") int id, @Valid ProfesseurEntity professeur,
                              BindingResult result, Model model) {
@@ -53,7 +61,7 @@ public class ProfesseurController {
     @PostMapping(value = "/professeur/save")
     public String save(ProfesseurEntity professeurEntity) {
         professeurRepository.save(professeurEntity);
-        return "redirect:/index";
+        return "redirect:/professeur/getAll";
     }
 
     @GetMapping(value = "/professeur/getAll")
