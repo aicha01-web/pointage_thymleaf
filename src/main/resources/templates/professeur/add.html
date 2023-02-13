@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="fr">
+<head>
+
+    <title>Création d'un professeur</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico"/>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<h1>Créer un professeur</h1>
+<div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" th:text="${username}">Project name</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/index">Accueil</a></li>
+                    <li><a href="/professeur/getAll">Professeurs</a></li>
+                    <!--                    <li><a href="#">Contact</a></li>-->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">A venir <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!--<ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">Static top</a></li>
+                    <li><a href="#/">Fixed top</a></li>
+                </ul>-->
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+</div>
+<div class="form-group">
+    <form method="post" th:action="@{/professeur/save}" th:object="${professeur}">
+
+        <div class="col-3">
+            <label class="form-label">Nom</label>
+            <input class="form-control" type="text" name="nom" th:field="*{nom}" placeholder="Nom"/>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Prénom</label>
+            <input class="form-control" type="text" name="nom" th:field="*{prenom}" placeholder="Prénom"/>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Email</label>
+            <input class="form-control" type="text" name="nom" th:field="*{email}" placeholder="Email"/>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Mot de passe</label>
+            <input class="form-control" type="password" name="nom" th:field="*{password}" placeholder="Mot de passe"/>
+        </div>
+
+        <div class="col-3">
+            <label class="form-label">Etat</label>
+            <input class="form-control" type="text" name="nom" th:field="*{etat}" placeholder="Etat"/>
+        </div>
+
+        <!--<div>
+            <input type="checkbox" id="etat" name="etat" value="etat">
+            <label for="etat">Etat ?</label>
+        </div>-->
+
+        <div class="form-group">
+            <input class="btn btn-success" type="submit" name="envoyer" value="Valider"/>
+            <input class="btn btn-danger" type="reset" name="annuler" value="Annuler"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+
+</body>
+</html>
