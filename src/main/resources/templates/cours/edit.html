@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+      layout:decorate="~{index}" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Modification</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico"/>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+
+<body>
+
+<div class="content" layout:fragment="content">
+    <div class="row">
+        <div class="col-10">
+            <div class="card card-chart">
+                <h2 class="title text-center">Modifier un cours</h2>
+                </br>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form action="#"
+                              th:action="@{/updateCours/{id}(id=${cours.id})}"
+                              th:object="${cours}"
+                              method="post">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label">Intitulé du cours</label>
+                                    <input class="form-control" type="text" name="nom" th:field="*{intitule}"
+                                           placeholder="Intitule"/>
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="form-label">Professeur</label>
+                                    <select th:field="*{professeur}" class="form-control">
+                                        <option value="">Selectionnez le prof</option>
+                                        <option th:each="professeur : ${professeurs}" th:value="${professeur.id}"
+                                                th:text="${professeur.prenom+professeur.nom}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label class="form-label">Classe</label>
+                                    <select th:field="*{classe}" class="form-control">
+                                        <option value="">Selectionnez la classe</option>
+                                        <option th:each="classe : ${classes}" th:value="${classe.id}"
+                                                th:text="${classe.nom}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="form-label">Salle</label>
+                                    <input class="form-control" type="text" name="nom" th:field="*{salle}"
+                                           placeholder="Salle"/>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label">Date du cours</label>
+                                    <input class="form-control" type="date" name="nom" th:field="*{datecours}"
+                                           placeholder="Date"/>
+                                </div>
+
+                                <div class="col-3">
+                                    <label class="form-label">Heure du cours</label>
+                                    <input class="form-control" type="time" name="nom" th:field="*{heure}"
+                                           placeholder="Heure"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-3">
+                                    <label class="form-label">Statut du cours</label>
+                                    <select th:field="*{statut}" class="form-control">
+                                        <option value="">Selectionnez le statut</option>
+                                        <option value="Confirmé">Confirmé</option>
+                                        <option value="Annulé">Annulé</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </br>
+                            <div class="form-group" align="center">
+                                <input class="btn btn-success" type="submit" value="Modifier">
+                                <input class="btn btn-danger" th:href="@{/cours/getAll}" type="submit" value="Annuler"/>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

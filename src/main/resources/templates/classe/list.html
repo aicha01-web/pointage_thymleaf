@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico"/>
 
-    <title>Professeurs</title>
+    <title>Classes</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
@@ -26,28 +26,24 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="title text-center">Liste des professeurs</h2>
+                    <h2 class="title text-center">Liste des classes</h2>
                 </div>
                 <div class="card-body">
-                    <a th:href="@{/professeur/add}">Créer <span class="tim-icons icon-simple-add"></span></i></a>
+                    <a th:href="@{/classe/add}">Créer <span class="tim-icons icon-simple-add"></span></i></a>
+                    <!--                    <a th:href="@{/professeur/add}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Créer</a>-->
                     <div class="table-responsive">
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
                             <tr>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Email</th>
-                                <th>Etat</th>
+                                <th>Nom de la classe</th>
                                 <th>Actions</th>
                             </tr>
-                            <tr th:each="p:${professeursList}">
-                                <td th:text="${p.prenom}"></td>
-                                <td th:text="${p.nom}"></td>
-                                <td th:text="${p.email}"></td>
-                                <td th:text="${p.etat ? 'Actif' : 'Inactif'} "></td>
-                                <td><a th:href="@{/edit/{id}(id=${p.id})}"><i class="tim-icons icon-pencil"></i></a>
-                                    <a th:href="@{/delete/{id}(id=${p.id})}"><i class="tim-icons icon-trash-simple"></i></a>
-                                </td>
+                            <tr th:each="c:${classesList}">
+                                <td th:text="${c.nom}"></td>
+                                <td><a th:href="@{/editClasse/{id}(id=${c.id})}"><i
+                                        class="tim-icons icon-pencil"></i></a>
+                                    <a th:href="@{/deleteClasse/{id}(id=${c.id})}"><i
+                                            class="tim-icons icon-trash-simple"></i></a></td>
                             </tr>
                         </table>
                     </div>

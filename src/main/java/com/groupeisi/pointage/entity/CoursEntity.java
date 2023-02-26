@@ -1,6 +1,5 @@
 package com.groupeisi.pointage.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,37 +8,43 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.sql.Date;
 
 @Entity
-@Table(name="Professeur")
+@Table(name="Cours")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ProfesseurEntity {
-
+public class CoursEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(length = 150,nullable = false)
-    private String nom;
-
-    @Column(length = 150,nullable = false)
-    private String prenom;
-
     @Email
     @Column(length = 150,nullable = false,unique = true)
-    private String email;
+    private String intitule;
 
     @NotNull
     @Column(length = 20,nullable = false)
-    private String password;
+    private Date datecours;
+
+    @NotNull
+    @Column(length = 20,nullable = false)
+    private String heure;
 
     @Column(length = 150,nullable = false)
-    private boolean etat;
+    private String statut;
 
-    @OneToMany(mappedBy ="professeur")
-    private List<CoursEntity> cours;
+    @NotNull
+    @Column(length = 20,nullable = false)
+    private String salle;
+
+    @ManyToOne
+    @JoinColumn(name="prof_id", nullable=false)
+    private ProfesseurEntity professeur;
+
+    @ManyToOne
+    @JoinColumn(name="classe_id", nullable=false)
+    private ClasseEntity classe;
 }

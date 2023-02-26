@@ -1,10 +1,10 @@
 package com.groupeisi.pointage.service;
 
-import com.groupeisi.pointage.domain.Professeur;
-import com.groupeisi.pointage.mapper.ProfesseurMapper;
-import com.groupeisi.pointage.repository.ProfesseurRepository;
-import lombok.AllArgsConstructor;
+import com.groupeisi.pointage.domain.Cours;
 import com.groupeisi.pointage.exception.RequestException;
+import com.groupeisi.pointage.mapper.CoursMapper;
+import com.groupeisi.pointage.repository.CoursRepository;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -18,53 +18,52 @@ import java.util.Locale;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProfesseurService {
-    ProfesseurRepository professeurRepository;
-    ProfesseurMapper profMapper;
+public class CoursService {
+    CoursRepository coursRepository;
+    CoursMapper coursMapper;
     MessageSource messageSource;
 
     @Transactional(readOnly = true)
-    public List<Professeur> getProfesseurs() {
-        return professeurRepository.findAll().stream().map(profMapper::toProfesseur).toList();
+    public List<Cours> getCours() {
+        return coursRepository.findAll().stream().map(coursMapper::toCours).toList();
     }
 
     @Transactional(readOnly = true)
-    public Professeur getProfesseur(int id) {
-        return profMapper.toProfesseur(professeurRepository.findById(id).orElseThrow(() ->
+    public Cours getCours(int id) {
+        return coursMapper.toCours(coursRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException(messageSource.getMessage("professeur.notfound", new Object[]{id},
                         Locale.getDefault()))));
     }
 
     @Transactional
-    public Professeur createProfesseur(Professeur professeur) {
-        professeurRepository.findById(professeur.getId())
+    public Cours createCours(Cours professeur) {
+        coursRepository.findById(professeur.getId())
                 .ifPresent(entity -> {
                     throw new RequestException(messageSource.getMessage("professeur.exists", new Object[]{professeur.getId()},
                             Locale.getDefault()), HttpStatus.CONFLICT);
                 });
-        return profMapper.toProfesseur(professeurRepository.save(profMapper.fromProfesseur(professeur)));
+        return coursMapper.toCours(coursRepository.save(coursMapper.fromCours(professeur)));
     }
 
     @Transactional
-    public Professeur updateProfesseur(int id, Professeur professeur){
-        return professeurRepository.findById(id)
+    public Cours updateCours(int id, Cours professeur){
+        return coursRepository.findById(id)
                 .map(entity -> {
                     professeur.setId(id);
-                    return profMapper.toProfesseur(professeurRepository.save(profMapper.fromProfesseur(professeur)));
+                    return coursMapper.toCours(coursRepository.save(coursMapper.fromCours(professeur)));
                 }).orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("professeur.notfound",
                         new Object[]{id},
                         Locale.getDefault())));
     }
 
     @Transactional
-    public void deleteProfesseur(int id) {
+    public void deleteCours(int id) {
         try {
-            professeurRepository.deleteById(id);
+            coursRepository.deleteById(id);
         } catch (Exception e) {
             throw new RequestException(messageSource.getMessage("professeur.errordeletion", new Object[]{id},
                     Locale.getDefault()),
                     HttpStatus.CONFLICT);
         }
     }
-
 }

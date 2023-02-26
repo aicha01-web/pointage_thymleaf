@@ -1,6 +1,5 @@
 package com.groupeisi.pointage.controller;
 
-import com.groupeisi.pointage.domain.Professeur;
 import com.groupeisi.pointage.entity.ProfesseurEntity;
 import com.groupeisi.pointage.repository.ProfesseurRepository;
 import lombok.AllArgsConstructor;
@@ -42,7 +41,7 @@ public class ProfesseurController {
     public String delete(@PathVariable("id") int id, Model model) {
         ProfesseurEntity prof = professeurRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Id professeur invalide:" + id));
-        professeurRepository.deleteById(id);
+        professeurRepository.deleteById(prof.getId());
         return "redirect:/professeur/getAll";
     }
 
@@ -73,7 +72,6 @@ public class ProfesseurController {
 
     @GetMapping("/")
     public String index() {
-        //map.addAttribute("professeursList", professeurRepository.findAll());
         return "dashboard";
     }
 
