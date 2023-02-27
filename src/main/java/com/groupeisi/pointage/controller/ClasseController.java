@@ -4,6 +4,7 @@ import com.groupeisi.pointage.entity.ClasseEntity;
 import com.groupeisi.pointage.repository.ClasseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,6 +22,7 @@ public class ClasseController {
     @Autowired
     private ClasseRepository classeRepository;
 
+    @PostAuthorize("hasAuthority('ADMIN')")
     @GetMapping(value = "/classe/add")
     public String add(ModelMap map) {
         ClasseEntity classe = new ClasseEntity();
@@ -28,6 +30,7 @@ public class ClasseController {
         return "classe/add";
     }
 
+    @PostAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/editClasse/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
         ClasseEntity classe = classeRepository.findById(id)
@@ -36,6 +39,7 @@ public class ClasseController {
         return "classe/edit";
     }
 
+    @PostAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/deleteClasse/{id}")
     public String deleteClasse(@PathVariable("id") int id, Model model) {
         ClasseEntity classe = classeRepository.findById(id)
@@ -44,6 +48,7 @@ public class ClasseController {
         return "redirect:/classe/getAll";
     }
 
+    @PostAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/updateClasse/{id}")
     public String updateUser(@PathVariable("id") int id, @Valid ClasseEntity classe,
                              BindingResult result, Model model) {
@@ -56,12 +61,14 @@ public class ClasseController {
         return "redirect:/classe/getAll";
     }
 
+    @PostAuthorize("hasAuthority('ADMIN')")
     @PostMapping(value = "/classe/save")
     public String save(ClasseEntity classeEntity) {
         classeRepository.save(classeEntity);
         return "redirect:/classe/getAll";
     }
 
+    @PostAuthorize("hasAuthority('ETUDIANT')")
     @GetMapping(value = "/classe/getAll")
     public String getAll(ModelMap map) {
         map.addAttribute("classesList", classeRepository.findAll());
